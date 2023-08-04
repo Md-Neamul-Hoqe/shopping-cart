@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <table style="max-width: 100%;">
+      <caption class="cart-title">My Shopping Cart</caption>
+      <tbody>
+         <tr id="product-1" class="cart-board">
+            <td class="product-image"><img src="./images/product-1.png" alt="product-1" width="300"></td>
+            <td class="product-name">iPhone11 128GB Black</td>
+            <td class="product-pcs">
+               <div>
+                  <button class="btn" onclick="decrease(1);subTotal()"><i class="fas fa-minus"></i></button>
+                  <input id="mobile1" type="number" min="0" value="1" class="">
+                  <button class="btn" onclick="increase(1);subTotal()"><i class="fas fa-plus"></i></button>
+               </div>
+            </td>
+            <td class="product-price">$ <span id="productCost1">56</span></td>
+            <td class="cart-action"><img src="./images/remove.png" alt="Cross icon" width="300"
+                  onclick="hide(1);subTotal()"></td>
+         </tr>
+
+         <tr id="product-2" class="cart-board">
+            <td class="product-image"><img src="./images/product-2.png" alt="product-2" width="300"></td>
+            <td class="product-name">Xiaomi Note 7s</td>
+            <td class="product-pcs">
+               <div>
+                  <button class="btn" onclick="decrease(2);subTotal()"><i class="fas fa-minus"></i></button>
+                  <input id="mobile2" type="number" min="0" value="1" class="">
+                  <button class="btn" onclick="increase(2);subTotal()"><i class="fas fa-plus"></i></button>
+               </div>
+            </td>
+            <td class="product-price">$ <span id="productCost2">56</span></td>
+            <td class="cart-action"><img src="./images/remove.png" alt="Cross icon" width="300"
+                  onclick="hide(2);subTotal()"></td>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+            <td>Sub Total</td>
+            <td colspan="3"></td>
+            <td>$ <span id="subTotal"></span></td>
+         </tr>
+         <tr>
+            <td>Tax</td>
+            <td colspan="3"></td>
+            <td>$ <span id="tax"></span></td>
+         </tr>
+         <tr>
+            <td>Total</td>
+            <td colspan="3"></td>
+            <td>$ <span id="total"></span></td>
+         </tr>
+      </tfoot>
+   </table>
+
+
+
+   <script>
+      /* Set The Prices of the products */
+      const mobileCost = 56;
+
+      subTotal();
+      function subTotal() {
+         const noOfItems = document.getElementsByClassName('cart-board').length;
+         var subTotal = 0, tax = 0;
+         for (let i = 0; i < noOfItems; i++) {
+            let cost = document.getElementById('productCost' + (i + 1)).innerHTML;
+            console.log((i + 1), "th Product Cost:", cost);
+            subTotal += parseFloat(cost);
+         }
+         /* Calculate the tax to the subTotal */
+         tax = subTotal * 0.0011;
+         tax = tax.toFixed(2);
+
+         /* Table footer section: calculate total cost */
+         document.getElementById('subTotal').innerHTML = subTotal;
+         document.getElementById('tax').innerHTML = tax;
+         var total = document.getElementById('total').innerHTML = subTotal + tax;
+         return total; /* Use later if needed */
+      }
+
+      /* Remove Selected Products */
+      function hide(Id) {
+         document.getElementById("product-" + Id).className = "hidden";
+         // subTotal();
+      }
+
+      /* Increase Number of Product Pices */
+      function increase(Id) {
+         console.log("increased of ", Id);
+         let presentValue = document.getElementById("mobile" + Id).value;
+         document.getElementById("mobile" + Id).value = ++presentValue;
+         return productCost(Id);
+      }
+
+      /* Decrease Numver of Product Pices */
+      function decrease(Id) {
+         console.log("decreased of ", Id);
+         let presentValue = document.getElementById("mobile" + Id).value; /* this value is a string type */
+         if (presentValue != 0) {
+            document.getElementById("mobile" + Id).value = --presentValue;
+         }
+         return productCost(Id);
+      }
+
+      /* Count subTotal Cost */
+      function productCost(Id) {
+         var pcs = document.getElementById("mobile" + Id).value;
+         var productCost = pcs * mobileCost;
+         document.getElementById("productCost" + Id).innerHTML = productCost;
+      }
+   </script>
+</body>
+
+</html>
