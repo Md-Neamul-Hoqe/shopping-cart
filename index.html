@@ -62,6 +62,9 @@
             <td colspan="3"></td>
             <td>$ <span id="total"></span></td>
          </tr>
+         <tr>
+            <td class="checkOut" colspan="5"><button>Check Out</button></td>
+         </tr>
       </tfoot>
    </table>
 
@@ -77,7 +80,7 @@
          var subTotal = 0, tax = 0;
          for (let i = 0; i < noOfItems; i++) {
             let cost = document.getElementById('productCost' + (i + 1)).innerHTML;
-            console.log((i + 1), "th Product Cost:", cost);
+            console.log((i + 1), "th Product Cost:", cost, "Total Cost Updated.");
             subTotal += parseFloat(cost);
          }
          /* Calculate the tax to the subTotal */
@@ -94,13 +97,15 @@
       /* Remove Selected Products */
       function hide(Id) {
          document.getElementById("product-" + Id).className = "hidden";
-         // subTotal();
       }
 
       /* Increase Number of Product Pices */
       function increase(Id) {
          console.log("increased of ", Id);
          let presentValue = document.getElementById("mobile" + Id).value;
+
+         /* string converted to float */
+         presentValue = parseFloat(presentValue);
          document.getElementById("mobile" + Id).value = ++presentValue;
          return productCost(Id);
       }
@@ -108,8 +113,14 @@
       /* Decrease Numver of Product Pices */
       function decrease(Id) {
          console.log("decreased of ", Id);
-         let presentValue = document.getElementById("mobile" + Id).value; /* this value is a string type */
+
+         /* this value is a string type */
+         let presentValue = document.getElementById("mobile" + Id).value;
+
+         /* string Convert to float number */
+         presentValue = parseFloat(presentValue);
          if (presentValue != 0) {
+            /* Decrease if not 0 */
             document.getElementById("mobile" + Id).value = --presentValue;
          }
          return productCost(Id);
@@ -118,7 +129,11 @@
       /* Count subTotal Cost */
       function productCost(Id) {
          var pcs = document.getElementById("mobile" + Id).value;
+
+         /* product mobileCost to number of pices */
          var productCost = pcs * mobileCost;
+
+         /* update to the sit */
          document.getElementById("productCost" + Id).innerHTML = productCost;
       }
    </script>

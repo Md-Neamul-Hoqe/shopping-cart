@@ -12,29 +12,42 @@ body {
 
 }
 
-tbody td{
+tbody td {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 }
-table, tr {
+
+table,
+tr {
 	width: 100%;
 	border: 5rem solid #F6F5FA;
 	border-collapse: separate;
 	border-spacing: 0;
 }
-tbody tr td{
+
+tbody tr td {
 	border-collapse: separate;
 	border-spacing: 4rem;
 	border-bottom: 2rem solid #F6F5FA;
 }
-tfoot tr td:last-child{
+tfoot{
+	font-weight: bold;
+}
+tfoot tr:first-child>td{
+	padding-top: 1.5rem;
+}
+tfoot tr td:last-child {
 	padding-right: 3rem;
 	text-align: end;
 }
-tfoot tr td:first-child{
+
+tfoot tr td:first-child {
 	padding-left: 3rem;
 	text-align: start;
+	font-weight: bold;
+	font-size: 20px;
 }
+
 .cart-title {
 	color: black;
 	font-size: 36px;
@@ -66,7 +79,7 @@ tr:last-child td:last-child {
 	border-bottom-right-radius: 10px;
 }
 
-.product-image img{
+.product-image img {
 	max-width: 150px;
 }
 
@@ -92,8 +105,11 @@ tr:last-child td:last-child {
 }
 
 .product-pcs input {
-	width: 2rem;
+	width: 3rem;
+	height: 3rem;
 	text-align: center;
+	border: 0;
+	background: #F6F5FA;
 }
 
 .cart-action img {
@@ -105,7 +121,17 @@ tr:last-child td:last-child {
 	margin-right: 15px;
 }
 
-
 .hidden {
 	display: none;
+}
+
+.checkOut button {
+	margin-top: 2rem;
+	border: 0;
+	border-radius: 0.5rem;
+	background: #2FBE70;
+	color: white;
+	padding: 15px 20px;
+	font-size: 26px;
+	float: right;
 }
